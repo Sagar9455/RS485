@@ -1,0 +1,50 @@
+RTNETLINK answers: Device or resource busy
+2025-03-12 17:29:30,800 [DEBUG] can config: {'fd': True, 'channel': 'can0', 'interface': 'socketcan'}
+2025-03-12 17:29:30,836 [INFO] Created a socket
+2025-03-12 17:29:30,837 [DEBUG] Binding socket to channel=can0
+2025-03-12 17:29:30,838 [DEBUG] Bound socket.
+2025-03-12 17:29:30,842 [DEBUG] Given rxfn is considered blocking
+2025-03-12 17:29:30,846 [DEBUG] Starting CanStack
+2025-03-12 17:29:30,848 [DEBUG] Main thread has started
+2025-03-12 17:29:30,852 [DEBUG] Relay thread has started
+2025-03-12 17:29:30,854 [INFO] Connection opened
+2025-03-12 17:29:30,855 [INFO] UDS Client Started
+2025-03-12 17:29:30,856 [INFO] TesterPresent<0x3e> - Sending TesterPresent request
+2025-03-12 17:29:30,858 [DEBUG] Sending request to server
+2025-03-12 17:29:30,859 [DEBUG] Sending 2 bytes : [3e00]
+2025-03-12 17:29:30,861 [DEBUG] Enqueuing a SendRequest for 2 bytes and TAT=Physical
+2025-03-12 17:29:30,862 [DEBUG] Waiting for server response
+2025-03-12 17:29:30,864 [DEBUG] Tx: <7A0> (03) [ ]	 023e00
+2025-03-12 17:29:30,867 [DEBUG] We've been asked to write a message to the bus
+2025-03-12 17:29:30,868 [DEBUG] sending: Timestamp:        0.000000        ID: 07a0    S Rx     F BS       DL:  3    02 3e 00
+2025-03-12 17:29:31,863 [DEBUG] No data received: [TimeoutException] - Did not receive IsoTP frame from the Transport layer in time (timeout=1 sec) 
+2025-03-12 17:29:31,863 [ERROR] [TimeoutException] : Did not receive response in time. P2 timeout time has expired (timeout=1.000 sec)
+2025-03-12 17:29:31,864 [WARNING] Tester Present failed: Did not receive response in time. P2 timeout time has expired (timeout=1.000 sec)
+2025-03-12 17:29:31,865 [INFO] DiagnosticSessionControl<0x10> - Switching session to defaultSession (0x01)
+2025-03-12 17:29:31,865 [DEBUG] Sending request to server
+2025-03-12 17:29:31,866 [DEBUG] Sending 2 bytes : [1001]
+2025-03-12 17:29:31,866 [DEBUG] Enqueuing a SendRequest for 2 bytes and TAT=Physical
+2025-03-12 17:29:31,866 [DEBUG] Waiting for server response
+2025-03-12 17:29:31,867 [DEBUG] Tx: <7A0> (03) [ ]	 021001
+2025-03-12 17:29:31,868 [DEBUG] We've been asked to write a message to the bus
+2025-03-12 17:29:31,868 [DEBUG] sending: Timestamp:        0.000000        ID: 07a0    S Rx     F BS       DL:  3    02 10 01
+2025-03-12 17:29:32,867 [DEBUG] No data received: [TimeoutException] - Did not receive IsoTP frame from the Transport layer in time (timeout=1 sec) 
+2025-03-12 17:29:32,867 [ERROR] [TimeoutException] : Did not receive response in time. P2 timeout time has expired (timeout=1.000 sec)
+2025-03-12 17:29:32,868 [ERROR] Error in Default Session: Did not receive response in time. P2 timeout time has expired (timeout=1.000 sec)
+2025-03-12 17:29:32,869 [INFO] DiagnosticSessionControl<0x10> - Switching session to extendedDiagnosticSession (0x03)
+2025-03-12 17:29:32,869 [DEBUG] Sending request to server
+2025-03-12 17:29:32,870 [DEBUG] Sending 2 bytes : [1003]
+2025-03-12 17:29:32,870 [DEBUG] Enqueuing a SendRequest for 2 bytes and TAT=Physical
+2025-03-12 17:29:32,870 [DEBUG] Waiting for server response
+2025-03-12 17:29:32,871 [DEBUG] Tx: <7A0> (03) [ ]	 021003
+2025-03-12 17:29:32,872 [DEBUG] We've been asked to write a message to the bus
+2025-03-12 17:29:32,872 [DEBUG] sending: Timestamp:        0.000000        ID: 07a0    S Rx     F BS       DL:  3    02 10 03
+2025-03-12 17:29:33,871 [DEBUG] No data received: [TimeoutException] - Did not receive IsoTP frame from the Transport layer in time (timeout=1 sec) 
+2025-03-12 17:29:33,871 [ERROR] [TimeoutException] : Did not receive response in time. P2 timeout time has expired (timeout=1.000 sec)
+2025-03-12 17:29:33,872 [ERROR] Error in Extended Session: Did not receive response in time. P2 timeout time has expired (timeout=1.000 sec)
+2025-03-12 17:29:33,872 [DEBUG] Stopping CanStack
+2025-03-12 17:29:33,873 [DEBUG] Main thread is exiting
+2025-03-12 17:29:33,920 [DEBUG] CanStack Stopped
+2025-03-12 17:29:33,921 [INFO] Connection closed
+2025-03-12 17:29:33,922 [INFO] UDS Client Closed
+
