@@ -39,9 +39,9 @@ menu_combinations = {
     (BTN_FIRST, BTN_ENTER): "ECU Information",
     (BTN_SECOND, BTN_ENTER): "Testcase Execution",
     (BTN_FIRST, BTN_SECOND, BTN_ENTER): "ECU Flashing",
-    (BTN_SECOND, BTN_FIRST, BTN_ENTER): "File Transfer (copying log files into USB device)",
-    (BTN_FIRST, BTN_SECOND, BTN_ENTER): "Reserved for future versions",
-    (BTN_SECOND, BTN_SECOND, BTN_ENTER): "Reserved for future versions"
+    (BTN_SECOND, BTN_FIRST, BTN_ENTER): "File Transfer\ncopying log files\nto USB device",
+    (BTN_FIRST, BTN_FIRST, BTN_ENTER): "Reserved\nfor future versions",
+    (BTN_SECOND, BTN_SECOND, BTN_ENTER): "Reserved\nfor future versions"
 }
 selected_sequence = []
 selected_option = None
@@ -56,12 +56,13 @@ def display_text(text):
         
         image = Image.new("1", (oled.width, oled.height))
         draw = ImageDraw.Draw(image)
-        draw.text((10, 25), text, font=font, fill=255)
+        draw.text((5, 25), text, font=font, fill=255)
         
         oled.image(image)
         oled.show()
         last_displayed_text = text
-
+display_text("Give input")
+time.sleep(0.2)
 def get_ecu_information():
     """Retrieve and display ECU information."""
     os.system('sudo ip link set can0 up type can bitrate 500000 dbitrate 1000000 restart-ms 1000 berr-reporting on fd on')
@@ -110,12 +111,13 @@ def get_ecu_information():
             if response.positive:
                 ecu_info = response.service_data.values[TARGET_DID]
                 logging.info(f"ECU information (DID {hex(TARGET_DID)}): {ecu_info}")
-                display_text(f"DID {hex(TARGET_DID)}: {ecu_info}")
+                #display_text(f"DID {hex()}: {ecu_info}")
+                #time.sleep(0.5)
             else:
                 display_text("No Data Received")
         except Exception as e:
             logging.error(f"Error reading ECU information (DID {hex(TARGET_DID)}): {e}")
-            display_text("ECU Read Error")
+            #display_text("ECU Read Error")
 
         logging.info("UDS Client Closed")
 
@@ -124,21 +126,21 @@ try:
         if GPIO.input(BTN_FIRST) == GPIO.LOW:
             if BTN_FIRST not in selected_sequence:
                 selected_sequence.append(BTN_FIRST)
-                display_text("First Button Pressed")
-            time.sleep(0.3)  # Debounce
+                display_text("1 is Pressed")
+                time.sleep(0.3)  # Debounce
 
         if GPIO.input(BTN_SECOND) == GPIO.LOW:
             if BTN_SECOND not in selected_sequence:
                 selected_sequence.append(BTN_SECOND)
-                display_text("Second Button Pressed")
-            time.sleep(0.3)  # Debounce
+                display_text("2 is Pressed")
+                time.sleep(0.3)  # Debounce
 
         if GPIO.input(BTN_ENTER) == GPIO.LOW:
             if BTN_ENTER not in selected_sequence:
                 selected_sequence.append(BTN_ENTER)
                 
-            selected_option = menu_combinations.get(tuple(selected_sequence), "Unknown Option")
-            display_text(f"Confirmed: {selected_option}")
+            selected_option = menu_combinations.get(tuple(selected_sequence), "Invalid Input")
+            display_text(f"{selected_option}")
 
             if selected_option == "ECU Information":
                 get_ecu_information()
@@ -147,8 +149,9 @@ try:
             time.sleep(1)
 
         if GPIO.input(BTN_THANKS) == GPIO.LOW:
-            display_text("System is shutting down")
-            time.sleep(1)
+            display_text("Shutting Down")
+            time.sleep(0.2)
+            os.system('sudo poweroff')
 
         time.sleep(0.1)  # Short debounce for stability
 
