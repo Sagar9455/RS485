@@ -32,14 +32,14 @@ i2c = busio.I2C(board.SCL, board.SDA)
 oled = adafruit_ssd1306.SSD1306_I2C(128, 64, i2c, addr=0x3C)
 
 # Load font
-font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 12)
+font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 9)
 
 # Menu options mapped to button sequences
 menu_combinations = {
     (BTN_FIRST, BTN_ENTER): "ECU Information",
     (BTN_SECOND, BTN_ENTER): "Testcase Execution",
     (BTN_FIRST, BTN_SECOND, BTN_ENTER): "ECU Flashing",
-    (BTN_SECOND, BTN_FIRST, BTN_ENTER): "File Transfer\ncopying log files\nto USB device)",
+    (BTN_SECOND, BTN_FIRST, BTN_ENTER): "File Transfer (copying log files into USB device)",
     (BTN_FIRST, BTN_SECOND, BTN_ENTER): "Reserved for future versions",
     (BTN_SECOND, BTN_SECOND, BTN_ENTER): "Reserved for future versions"
 }
@@ -97,19 +97,25 @@ def get_ecu_information():
     stack = isotp.CanStack(bus=bus, address=tp_addr, params=isotp_params)
     conn = PythonIsoTpConnection(stack)
 
+    TARGET_DID = 0xF187  # Change this to the DID you want to display
+
     with Client(conn, request_timeout=5, config=config) as client:
         logging.info("UDS Client Started")
         client.tester_present()
         client.change_session(0x01)
         client.change_session(0x03)
 
-        for did in [0xF187, 0xF193, 0xF1AA, 0xF1B1]:
-            try:
-                response = client.read_data_by_identifier(did)
-                if response.positive:
-                    logging.info(f"ECU information (DID {hex(did)}): {response.service_data.values[did]}")
-            except Exception as e:
-                logging.error(f"Error reading ECU information (DID {hex(did)}): {e}")
+        try:
+            response = client.read_data_by_identifier(TARGET_DID)
+            if response.positive:
+                ecu_info = response.service_data.values[TARGET_DID]
+                logging.info(f"ECU information (DID {hex(TARGET_DID)}): {ecu_info}")
+                display_text(f"DID {hex(TARGET_DID)}: {ecu_info}")
+            else:
+                display_text("No Data Received")
+        except Exception as e:
+            logging.error(f"Error reading ECU information (DID {hex(TARGET_DID)}): {e}")
+            display_text("ECU Read Error")
 
         logging.info("UDS Client Closed")
 
