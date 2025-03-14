@@ -39,7 +39,7 @@ menu_combinations = {
     (BTN_FIRST, BTN_ENTER): "ECU Information",
     (BTN_SECOND, BTN_ENTER): "Testcase Execution",
     (BTN_FIRST, BTN_SECOND, BTN_ENTER): "ECU Flashing",
-    (BTN_SECOND, BTN_FIRST, BTN_ENTER): "File Transfer (copying log files into USB device)",
+    (BTN_SECOND, BTN_FIRST, BTN_ENTER): "File Transfer\ncopying log files\nto USB device)",
     (BTN_FIRST, BTN_SECOND, BTN_ENTER): "Reserved for future versions",
     (BTN_SECOND, BTN_SECOND, BTN_ENTER): "Reserved for future versions"
 }
@@ -50,7 +50,7 @@ last_displayed_text = ""
 def display_text(text):
     """Function to display text on OLED only if changed"""
     global last_displayed_text
-    if text != last_displayed_text:  # Avoid redundant updates
+    if text != last_displayed_text:
         oled.fill(0)  # Clear screen
         oled.show()
         
@@ -116,29 +116,35 @@ def get_ecu_information():
 try:
     while True:
         if GPIO.input(BTN_FIRST) == GPIO.LOW:
-            selected_sequence.append(BTN_FIRST)
-            time.sleep(0.3)  # Improved debounce
-        
+            if BTN_FIRST not in selected_sequence:
+                selected_sequence.append(BTN_FIRST)
+                display_text("First Button Pressed")
+            time.sleep(0.3)  # Debounce
+
         if GPIO.input(BTN_SECOND) == GPIO.LOW:
-            selected_sequence.append(BTN_SECOND)
-            time.sleep(0.3)  # Improved debounce
-        
+            if BTN_SECOND not in selected_sequence:
+                selected_sequence.append(BTN_SECOND)
+                display_text("Second Button Pressed")
+            time.sleep(0.3)  # Debounce
+
         if GPIO.input(BTN_ENTER) == GPIO.LOW:
-            selected_sequence.append(BTN_ENTER)
+            if BTN_ENTER not in selected_sequence:
+                selected_sequence.append(BTN_ENTER)
+                
             selected_option = menu_combinations.get(tuple(selected_sequence), "Unknown Option")
             display_text(f"Confirmed: {selected_option}")
-            
+
             if selected_option == "ECU Information":
                 get_ecu_information()
-            
+
             selected_sequence.clear()  # Reset sequence after confirmation
             time.sleep(1)
-        
+
         if GPIO.input(BTN_THANKS) == GPIO.LOW:
             display_text("System is shutting down")
             time.sleep(1)
-        
-        time.sleep(0.1)  # Shorter general debounce delay
+
+        time.sleep(0.1)  # Short debounce for stability
 
 except KeyboardInterrupt:
     print("\nExiting...")
