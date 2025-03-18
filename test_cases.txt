@@ -1,0 +1,6 @@
+# TestCaseID,Step,ServiceID,SubFunction/ID,ExpectedResponse
+TC_001,Enter Extended Session,0x10,0x03,0x50
+TC_002,Security Access (Request Seed),0x27,0x01,0x67
+TC_003,Security Access (Send Key),0x27,0x02,0x67
+TC_004,Read VIN,0x22,0xF190,0x62
+TC_005,Write Parameter,0x2E,0x1234,0x6E
