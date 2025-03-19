@@ -2,14 +2,15 @@ import unittest
 import can
 import csv
 import udsoncan
+import isotp
 from udsoncan.client import Client
 from udsoncan.connections import PythonIsoTpConnection
 from udsoncan.services import DiagnosticSessionControl, SecurityAccess, ReadDataByIdentifier, WriteDataByIdentifier
 
 # CAN Configuration
-CAN_CHANNEL = "vcan0"
-TX_ID = 0x7E0
-RX_ID = 0x7E8
+CAN_CHANNEL = "can0"
+TX_ID = 0x7A0
+RX_ID = 0x7A8
 
 
 class TestUDSFromText(unittest.TestCase):
@@ -17,8 +18,11 @@ class TestUDSFromText(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Setup UDS client and CAN connection before running tests."""
-        cls.bus = can.interface.Bus(channel=CAN_CHANNEL, bustype="socketcan")
-        cls.conn = PythonIsoTpConnection(cls.bus, txid=TX_ID, rxid=RX_ID)
+        cls.bus = can.interface.Bus(channel=CAN_CHANNEL, bustype="socketcan", fd=True)
+        cls.tp_layer = isotp.CanStack(cls.bus, 
+        address=isotp.Address(txid=TX_ID, rxid=RX_ID),
+        params={"tx_padding": 0x00})
+        cls.conn = PythonIsoTpConnection(cls.tp_layer)
         cls.client = Client(cls.conn)
         cls.client.open()
 
@@ -30,7 +34,8 @@ class TestUDSFromText(unittest.TestCase):
             for row in reader:
                 if not row[0].startswith("#"):  # Ignore comments
                     cls.test_cases.append(row)
-
+                    print(cls.test_cases)
+       
     @classmethod
     def tearDownClass(cls):
         """Close UDS client and CAN connection after tests."""
@@ -39,6 +44,7 @@ class TestUDSFromText(unittest.TestCase):
 
     def test_uds_sequence(self):
         """Execute UDS test cases dynamically from a file."""
+        self.
         for case in self.test_cases:
             tc_id, step, service_id, subfunction, expected_response = case
 
