@@ -262,9 +262,9 @@ try:
                 display_text("Fetching\nECU Information...")
                 get_ecu_information()
                 display_text("Completed")
-            if selected_option == "Testcase Execution":
-                time.sleep(0.5)
-                display_text("Sahithi is working...")
+           # if selected_option == "Testcase Execution":
+               # time.sleep(0.5)
+            #    display_text("Sahithi is working...")
                 #get_ecu_information()
                 #display_text("Completed")
             if selected_option == "Exit":

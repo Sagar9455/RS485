@@ -1,2 +1,4 @@
 # TestCaseID,Step,ServiceID,SubFunction/ID,ExpectedResponse
-TC_001,Enter Extended Session,0x10,0x03,0x5
+TC_001,Enter Extended Session,0x10,0x01,0x50
+TC_002,Enter programming Session,0x10,0x03,0x50
+TC_003,Read VIN,0x22,0xF10,0x62
