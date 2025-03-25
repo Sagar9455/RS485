@@ -1,0 +1,11 @@
+Cycle: 73
+Contents:
+1. EOL (i__967843984_285638tuinfo.html)
+
+# This file should store the parsed contents of CAN logs in a structured format.
+# Example structure (expand as needed):
+# Timestamp | CAN ID | DLC | Data | Message Type
+# 12:00:01  | 0x123  |  8  | AA BB CC DD EE FF 00 11 | Diagnostic
+# 12:00:02  | 0x456  |  4  | 11 22 33 44 | Status
+# ...
+
