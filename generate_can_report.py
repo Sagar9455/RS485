@@ -19,7 +19,7 @@ def save_to_excel(df, output_file):
     print(f"Excel report saved: {output_file}")
 
 if __name__ == "__main__":
-    text_file = "can_log_report.txt"  # Ensure this file exists with structured data
+    text_file = "zzzZ.asc"  # Ensure this file exists with structured data
     excel_file = "can_report.xlsx"
     df = parse_text_to_dataframe(text_file)
     save_to_excel(df, excel_file)
