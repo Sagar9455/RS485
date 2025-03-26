@@ -17,7 +17,7 @@ def save_to_excel(df, output_file):
     print(f"Excel report saved: {output_file}")
 
 if __name__ == "__main__":
-    asc_file = "Rasp_can_log3.asc"  # Ensure this file exists
+    asc_file = "can_log_report.txt"  # Ensure this file exists
     excel_file = "can_report.xlsx"
     df = parse_asc_to_dataframe(asc_file)
     save_to_excel(df, excel_file)
