@@ -1,25 +1,23 @@
 import pandas as pd
+import re
 
-def parse_text_to_dataframe(file_path):
+def parse_asc_to_dataframe(asc_file):
     data = []
-    with open(file_path, 'r') as f:
-        for line in f:
-            if line.startswith('#') or not line.strip():
-                continue  # Skip comments and empty lines
-            
-            parts = line.split('|')
-            if len(parts) == 5:
-                timestamp, can_id, dlc, data_bytes, msg_type = [p.strip() for p in parts]
-                data.append([timestamp, can_id, int(dlc), data_bytes, msg_type])
+    with open(asc_file, 'r', encoding='utf-8', errors='ignore') as file:
+        for line in file:
+            match = re.match(r'^(\d+\.\d+)\s+(\d+)\s+Rx\s+(0x[0-9A-Fa-f]+)\s+(\d)\s+([0-9A-Fa-f ]+)', line)
+            if match:
+                timestamp, channel, can_id, dlc, data_bytes = match.groups()
+                data.append([float(timestamp), channel, can_id, int(dlc), data_bytes.strip()])
     
-    return pd.DataFrame(data, columns=['Timestamp', 'CAN ID', 'DLC', 'Data', 'Message Type'])
+    return pd.DataFrame(data, columns=['Timestamp', 'Channel', 'CAN ID', 'DLC', 'Data'])
 
 def save_to_excel(df, output_file):
     df.to_excel(output_file, index=False)
     print(f"Excel report saved: {output_file}")
 
 if __name__ == "__main__":
-    text_file = "zzzZ.asc"  # Ensure this file exists with structured data
+    asc_file = "Rasp_can_log3.asc"  # Ensure this file exists
     excel_file = "can_report.xlsx"
-    df = parse_text_to_dataframe(text_file)
+    df = parse_asc_to_dataframe(asc_file)
     save_to_excel(df, excel_file)
