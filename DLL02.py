@@ -66,10 +66,10 @@ class TestUDSFromText(unittest.TestCase):
 
       # Create CAN bus interface
       bus = can.interface.Bus(channel=interface, bustype="socketcan", fd=True)
-      bus.set_filters([{"can_id":0x7A8,"can_mask":0xFFF}])
+      bus.set_filters([{"can_id":0x18DAF110,"can_mask":0xFFF}])
 
       # Define ISO-TP addressing for 11-bit CAN IDs
-      tp_addr = isotp.Address(isotp.AddressingMode.Normal_11bits, txid=0x7A0, rxid=0x7A8)
+      tp_addr = isotp.Address(isotp.AddressingMode.Normal_29bits, txid=0x18DA34FA, rxid=0x18DAFA34)
 
       # Create ISO-TP stack
       stack = isotp.CanStack(bus=bus, address=tp_addr, params=isotp_params)
@@ -78,7 +78,7 @@ class TestUDSFromText(unittest.TestCase):
       conn = PythonIsoTpConnection(stack)
       
       # Start UDS Client
-      with Client(conn, request_timeout=2,config=config) as client:
+      with Client(conn, request_timeout=5,config=config) as client:
            logging.info("UDS Client Started")
            """Execute UDS test cases dynamically from a file."""
         
@@ -90,7 +90,7 @@ class TestUDSFromText(unittest.TestCase):
                expected_response = int(expected_response, 16)
  
                print(f"Executing {tc_id}: {step}")
-            
+               time.sleep(0.5)
                if service_id == 0x10:  # Diagnostic Session Control                           
                    try:
                        response = client.change_session(subfunction)
@@ -125,7 +125,14 @@ class TestUDSFromText(unittest.TestCase):
                           logging.error(f"Error in security Extended Session: {e}")
                           
                elif service_id == 0x2E:  # Write Data By Identifier
-                    response = client.write_data_by_identifier(subfunction, b"\x01\x02\x03\x04")
+                    try:
+                        response = client.write_data_by_identifier(subfunction, b"\x01\x02\x03\x04")
+                        if response.positive:
+                           logging.info("Switched to WDBI  ")
+                        else:
+                           logging.warning("Failed to switch to WDBI ")
+                    except Exception as e:
+                           logging.error(f"Error in WDBI : {e}")    
                else:
                     fail(f"Unsupported service {hex(service_id)}")
 

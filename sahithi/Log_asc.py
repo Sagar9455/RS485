@@ -20,5 +20,5 @@ def create_asc_file(file_name):
 			data_str = ' '.join([f"{byte:02X}" for byte in data])
 			file.write(f"{Timestamp}     {Direction}          {Msg_ID:03X}     {DLC}    {data_str}\n")
 		
-create_asc_file("Rasp_can_log3.asc")
+create_asc_file("Rasp_can_log99.asc")
  
