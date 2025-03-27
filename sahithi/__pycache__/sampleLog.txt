@@ -1,0 +1,4 @@
+22:34:41	DefaultSession		1001		1003
+22:34:56	DefaultSessionResponse	5001		5001
+22:35:22	ExtendedSession		1003		1003
+22:35:50	ExtendedSessionResponse	5003		7f
