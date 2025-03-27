@@ -53,7 +53,7 @@ class TestUDSFromText(unittest.TestCase):
           0xF193: udsoncan.AsciiCodec(13),
           0xF120: udsoncan.AsciiCodec(16),
           0xF18B: udsoncan.AsciiCodec(8),
-          0xF102: udsoncan.AsciiCodec(0),
+          0xF102: udsoncan.AsciiCodec(16),
           0xF188: udsoncan.AsciiCodec(16),
           0xF18C: udsoncan.AsciiCodec(16),
           0xF197: udsoncan.AsciiCodec(16),
