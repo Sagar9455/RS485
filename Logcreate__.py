@@ -11,7 +11,7 @@ from udsoncan.connections import PythonIsoTpConnection
 from udsoncan.services import SecurityAccess
 
 # Define ASC log file
-asc_log_filename = "can_log.asc"
+asc_log_filename = "can_loggfg.asc"
 
 # Initialize ASC log file
 with open(asc_log_filename, "w") as asc_file:

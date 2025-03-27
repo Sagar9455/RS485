@@ -82,6 +82,7 @@ class TestUDSFromText(unittest.TestCase):
         
            for case in test_cases:
                tc_id, step, service_id, subfunction, expected_response = case
+               time.sleep(0.5)
 
                service_id = int(service_id, 16)
                subfunction = int(subfunction, 16)
