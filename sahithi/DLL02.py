@@ -10,6 +10,7 @@ import logging
 import os
 import time
 
+
 class TestUDSFromText(unittest.TestCase):
       test_cases = []
       with open("test_cases_.txt", "r") as f:
@@ -56,7 +57,7 @@ class TestUDSFromText(unittest.TestCase):
           0xF188: udsoncan.AsciiCodec(16),
           0xF18C: udsoncan.AsciiCodec(16),
           0xF197: udsoncan.AsciiCodec(16),
-          0xF1A1: udsoncan.AsciiCodec(16)  
+          0xF1A1: udsoncan.AsciiCodec(16)   
       }
       # Define CAN interface
       interface = "can0"
@@ -81,7 +82,6 @@ class TestUDSFromText(unittest.TestCase):
         
            for case in test_cases:
                tc_id, step, service_id, subfunction, expected_response = case
-               time.sleep(0.5)
 
                service_id = int(service_id, 16)
                subfunction = int(subfunction, 16)
@@ -123,7 +123,14 @@ class TestUDSFromText(unittest.TestCase):
                           logging.error(f"Error in security Extended Session: {e}")
                           
                elif service_id == 0x2E:  # Write Data By Identifier
-                    response = client.write_data_by_identifier(subfunction, b"\x01\x02\x03\x04")
+                    try:
+                        response = client.write_data_by_identifier(subfunction, b"\x01\x02\x03\x04")
+                        if response.positive:
+                           logging.info("Switched to WDBI  ")
+                        else:
+                           logging.warning("Failed to switch to WDBI ")
+                    except Exception as e:
+                           logging.error(f"Error in WDBI : {e}")    
                else:
                     fail(f"Unsupported service {hex(service_id)}")
 
