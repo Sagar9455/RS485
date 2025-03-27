@@ -10,13 +10,6 @@ import logging
 import os
 import time
 
-
-# CAN Configuration
-#CAN_CHANNEL = "can0"
-#TX_ID = 0x7A0
-#RX_ID = 0x7A8
-
-
 class TestUDSFromText(unittest.TestCase):
       test_cases = []
       with open("test_cases_.txt", "r") as f:
@@ -59,7 +52,11 @@ class TestUDSFromText(unittest.TestCase):
           0xF193: udsoncan.AsciiCodec(13),
           0xF120: udsoncan.AsciiCodec(16),
           0xF18B: udsoncan.AsciiCodec(8),
-          0xF102: udsoncan.AsciiCodec(13) 
+          0xF102: udsoncan.AsciiCodec(0),
+          0xF188: udsoncan.AsciiCodec(16),
+          0xF18C: udsoncan.AsciiCodec(16),
+          0xF197: udsoncan.AsciiCodec(16),
+          0xF1A1: udsoncan.AsciiCodec(16)  
       }
       # Define CAN interface
       interface = "can0"
@@ -84,6 +81,7 @@ class TestUDSFromText(unittest.TestCase):
         
            for case in test_cases:
                tc_id, step, service_id, subfunction, expected_response = case
+               time.sleep(0.5)
 
                service_id = int(service_id, 16)
                subfunction = int(subfunction, 16)
