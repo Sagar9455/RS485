@@ -1,0 +1,31 @@
+{
+    "can_interface": "can0",
+    "can_ids": {
+        "tx_id": "0x8A0",
+        "rx_id": "0x8A8"
+    },
+    "isotp_params": {
+        "stmin": 10,
+        "blocksize": 8,
+        "wftmax": 0
+    },
+    "uds_config": {
+        "ignore_server_timing_requirements": true,
+        "data_identifiers": {
+            "0xF190": "ECU Serial Number",
+            "0xF18C": "ECU Hardware Version",
+            "0xF1A2": "ECU Software Version"
+        }
+    },
+    "gpio_pins": {
+        "btn_first": 12,
+        "btn_second": 16,
+        "btn_enter": 20,
+        "btn_thanks": 21
+    },
+    "oled": {
+        "width": 128,
+        "height": 64,
+        "address": "0x3C"
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "can_interface": "can0",
+    "isotp_params": {
+        "stmin": 32,
+        "blocksize": 8,
+        "wftmax": 0,
+        "tx_padding": 0,
+        "rx_flowcontrol_timeout": 1000,
+        "rx_consecutive_frame_timeout": 1000,
+        "max_frame_size": 4095,
+        "can_fd": true,
+        "bitrate_switch": true
+    },
+    "uds_config": {
+        "ignore_server_timing_requirements": true,
+        "data_identifiers": {
+            "0xF100": 8,
+            "0xF101": 8,
+            "0xF187": 13,
+            "0xF1AA": 13,
+            "0xF1B1": 13,
+            "0xF193": 13,
+            "0xF120": 16,
+            "0xF18B": 8,
+            "0xF102": 13
+        }
+    },
+    "can_ids": {
+        "tx_id": "0x8A0",
+        "rx_id": "0x6A8"
+    }
+}
