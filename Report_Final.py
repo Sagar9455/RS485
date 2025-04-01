@@ -114,7 +114,7 @@ def get_ecu_information():
     bus.set_filters([{"can_id":0x7A8,"can_mask":0xFFF}])
 
     # Define ISO-TP addressing for 11-bit CAN IDs
-    tp_addr = isotp.Address(isotp.AddressingMode.Normal_11bits, txid=0x8A0, rxid=0x6A8)
+    tp_addr = isotp.Address(isotp.AddressingMode.Normal_11bits, txid=0x7A0, rxid=0x7A8)
 
     # Create ISO-TP stack
     stack = isotp.CanStack(bus=bus, address=tp_addr, params=isotp_params)
@@ -139,8 +139,8 @@ def get_ecu_information():
                     'id': 'Default Session',
                     'service': 'Session Control',
                     'request': '0x10 0x01',
-                    'expected_response': '0x7F 0x10 0x00',  # Example expected response
-                    'actual_response': '0x7F 0x10 0x00',  # Example actual response
+                    'expected_response': '0x02 0x60',  # Example expected response
+                    'actual_response': hex(response.original_payload) if response.original_payload else "N/A",  # Example actual response
                     'status': 'Pass'
                 })
             else:
@@ -164,6 +164,38 @@ def get_ecu_information():
                 'status': 'Fail'
             })
 
+        try:
+            response = client.change_session(0x03)  # 0x01: Default Session
+            if response.positive:
+                logging.info("Successfully switched to Default Session (0x10 0x01)")
+                test_report.append({
+                    'id': 'Default Session',
+                    'service': 'Session Control',
+                    'request': '0x10 0x03',
+                    'expected_response': '0x02 0x60',  # Example expected response
+                    'actual_response': hex(response.original_payload) if response.original_payload else "N/A",  # Example actual response
+                    'status': 'Pass'
+                })
+            else:
+                logging.warning("Failed to switch to Default Session (0x10 0x01)")
+                test_report.append({
+                    'id': 'Default Session',
+                    'service': 'Session Control',
+                    'request': '0x10 0x03',
+                    'expected_response': '0x7F 0x10 0x00',
+                    'actual_response': 'N/A',
+                    'status': 'Fail'
+                })
+        except Exception as e:
+            logging.error(f"Error switching to Default Session (0x10 0x01): {e}")
+            test_report.append({
+                'id': 'Default Session',
+                'service': 'Session Control',
+                'request': '0x10 0x03',
+                'expected_response': '0x7F 0x10 0x00',
+                'actual_response': f'Error: {e}',
+                'status': 'Fail'
+            })
         for did in config["data_identifiers"]:
             try:
                 response = client.read_data_by_identifier(did)
@@ -201,7 +233,9 @@ def get_ecu_information():
                 logging.error(f"Error reading ECU information (DID {hex(did)}): {e}")
 
         logging.info("UDS Client Closed")
-
+        
+    generate_html_report(test_report)
+   
 def generate_html_report(test_report):
     """Generate HTML report based on the collected test report data."""
     html_content = """
@@ -210,7 +244,7 @@ def generate_html_report(test_report):
     <body>
     <h1>UDS Test Execution Report</h1>
     <table border="1">
-        <tr><th>Test Case ID</th><th>Service</th><th>Request</th><th>Expected Response</th><th>Actual Response</th><th>Status</th></tr>
+        <tr><th>Request</th><th>Service</th><th>Request</th><th>Expected Response</th><th>Actual Response</th><th>Status</th></tr>
     """
     
     # Loop through the test report and append each result dynamically
@@ -234,7 +268,7 @@ def generate_html_report(test_report):
     """
     
     # Save the HTML content to a file
-    with open("test_report.html", "w") as report_file:
+    with open("test_report_1.html", "w") as report_file:
         report_file.write(html_content)
     
     logging.info("HTML report generated successfully")
