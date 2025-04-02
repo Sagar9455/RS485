@@ -1,0 +1,30 @@
+
+    <html>
+    <head><title>UDS Test Execution Report</title></head>
+    <body>
+    <h1>UDS Test Execution Report</h1>
+    <table border="1">
+        <tr><th>Request</th><th>Service</th><th>Request</th><th>Expected Response</th><th>Actual Response</th><th>Status</th></tr>
+    
+        <tr>
+            <td>Default Session</td>
+            <td>Session Control</td>
+            <td>0x10 0x01</td>
+            <td>0x7F 0x10 0x00</td>
+            <td>Error: 'bytes' object cannot be interpreted as an integer</td>
+            <td style="color: red;">Fail</td>
+        </tr>
+        
+        <tr>
+            <td>Default Session</td>
+            <td>Session Control</td>
+            <td>0x10 0x03</td>
+            <td>0x7F 0x10 0x00</td>
+            <td>Error: 'bytes' object cannot be interpreted as an integer</td>
+            <td style="color: red;">Fail</td>
+        </tr>
+        
+    </table>
+    </body>
+    </html>
+    

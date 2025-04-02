@@ -268,7 +268,7 @@ def generate_html_report(test_report):
     """
     
     # Save the HTML content to a file
-    with open("test_report_2.xlsx", "w") as report_file:
+    with open("test_report_3.txt", "w") as report_file:
         report_file.write(html_content)
     
     logging.info("HTML report generated successfully")
