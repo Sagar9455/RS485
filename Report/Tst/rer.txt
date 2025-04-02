@@ -1,0 +1,53 @@
+RTNETLINK answers: Device or resource busy
+2025-04-02 15:35:10,234 [DEBUG] can config: {'fd': True, 'channel': 'can0', 'interface': 'socketcan'}
+2025-04-02 15:35:10,294 [INFO] Created a socket
+2025-04-02 15:35:10,295 [DEBUG] Binding socket to channel=can0
+2025-04-02 15:35:10,296 [DEBUG] Bound socket.
+2025-04-02 15:35:10,299 [DEBUG] Given rxfn is considered blocking
+2025-04-02 15:35:10,302 [DEBUG] Starting CanStack
+2025-04-02 15:35:10,304 [DEBUG] Main thread has started
+2025-04-02 15:35:10,305 [DEBUG] Relay thread has started
+2025-04-02 15:35:10,306 [INFO] Connection opened
+Waiting for button press...
+Button pressed! Sending UDS request...
+2025-04-02 15:35:14,845 [INFO] DiagnosticSessionControl<0x10> - Switching session to defaultSession (0x01)
+2025-04-02 15:35:14,846 [DEBUG] Sending request to server
+2025-04-02 15:35:14,846 [DEBUG] Sending 2 bytes : [1001]
+2025-04-02 15:35:14,847 [DEBUG] Enqueuing a SendRequest for 2 bytes and TAT=Physical
+2025-04-02 15:35:14,848 [DEBUG] Waiting for server response
+2025-04-02 15:35:14,848 [DEBUG] Tx: <7A0> (08) [ ]	 0210010000000000
+2025-04-02 15:35:14,849 [DEBUG] We've been asked to write a message to the bus
+2025-04-02 15:35:14,849 [DEBUG] sending: Timestamp:        0.000000        ID: 07a0    S Rx     F BS       DL:  8    02 10 01 00 00 00 00 00
+2025-04-02 15:35:14,880 [DEBUG] Rx: <7A8> (08) [p]	 065001003201f4aa
+2025-04-02 15:35:14,882 [DEBUG] Received 6 bytes : [5001003201f4]
+2025-04-02 15:35:14,883 [DEBUG] Received response from server
+2025-04-02 15:35:14,884 [INFO] Received positive response for service DiagnosticSessionControl (0x10) from server.
+2025-04-02 15:35:14,885 [INFO] DiagnosticSessionControl<0x10> - Received new timing parameters. P2=0.050s and P2*=5.000s.  Using these value from now on.
+2025-04-02 15:35:14,886 [INFO] DiagnosticSessionControl<0x10> - Switching session to extendedDiagnosticSession (0x03)
+2025-04-02 15:35:14,887 [DEBUG] Sending request to server
+2025-04-02 15:35:14,888 [DEBUG] Sending 2 bytes : [1003]
+2025-04-02 15:35:14,889 [DEBUG] Enqueuing a SendRequest for 2 bytes and TAT=Physical
+2025-04-02 15:35:14,890 [DEBUG] Waiting for server response
+2025-04-02 15:35:14,891 [DEBUG] Tx: <7A0> (08) [ ]	 0210030000000000
+2025-04-02 15:35:14,892 [DEBUG] We've been asked to write a message to the bus
+2025-04-02 15:35:14,892 [DEBUG] sending: Timestamp:        0.000000        ID: 07a0    S Rx     F BS       DL:  8    02 10 03 00 00 00 00 00
+2025-04-02 15:35:14,918 [DEBUG] Rx: <7A8> (08) [p]	 065003003201f4aa
+2025-04-02 15:35:14,919 [DEBUG] Received 6 bytes : [5003003201f4]
+2025-04-02 15:35:14,921 [DEBUG] Received response from server
+2025-04-02 15:35:14,922 [INFO] Received positive response for service DiagnosticSessionControl (0x10) from server.
+2025-04-02 15:35:14,923 [INFO] DiagnosticSessionControl<0x10> - Received new timing parameters. P2=0.050s and P2*=5.000s.  Using these value from now on.
+2025-04-02 15:35:14,924 [INFO] ReadDataByIdentifier<0x22> - Reading data identifier : 0xf100 (IdentificationOptionVehicleManufacturerSpecificDataIdentifier)
+2025-04-02 15:35:14,924 [DEBUG] Sending request to server
+2025-04-02 15:35:14,925 [DEBUG] Sending 3 bytes : [22f100]
+2025-04-02 15:35:14,926 [DEBUG] Enqueuing a SendRequest for 3 bytes and TAT=Physical
+2025-04-02 15:35:14,927 [DEBUG] Waiting for server response
+2025-04-02 15:35:14,927 [DEBUG] Tx: <7A0> (08) [ ]	 0322f10000000000
+2025-04-02 15:35:14,928 [DEBUG] We've been asked to write a message to the bus
+2025-04-02 15:35:14,928 [DEBUG] sending: Timestamp:        0.000000        ID: 07a0    S Rx     F BS       DL:  8    03 22 f1 00 00 00 00 00
+2025-04-02 15:35:14,949 [DEBUG] Rx: <7A8> (08) [p]	 0762f100302e3600
+2025-04-02 15:35:14,950 [DEBUG] Received 7 bytes : [62f100302e3600]
+2025-04-02 15:35:14,952 [DEBUG] Received response from server
+2025-04-02 15:35:14,952 [INFO] Received positive response for service ReadDataByIdentifier (0x22) from server.
+2025-04-02 15:35:14,953 [ERROR] [InvalidResponseException] : ReadDataByIdentifier service execution returned an invalid response. Value for data identifier 0xf100 was incomplete according to definition in configuration
+Error: ReadDataByIdentifier service execution returned an invalid response. Value for data identifier 0xf100 was incomplete according to definition in configuration
+Report generated: DID_Report.html
