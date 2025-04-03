@@ -1,0 +1,43 @@
+
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            table { border-collapse: collapse; width: 80%; margin: auto; }
+            th, td { border: 1px solid black; padding: 10px; text-align: center; }
+            th { background-color: green; color: white; }
+            .pass { background-color: #d4edda; }
+            .fail { background-color: #f8d7da; }
+        </style>
+    </head>
+    <body>
+        <h2 style='text-align:center;'>UDS Diagnostic Report</h2>
+        <table>
+            <tr>
+                <th>Timestamp</th>
+                <th>Action</th>
+                <th>Status</th>
+            </tr>
+    
+            <tr class="fail">
+                <td>2025-04-02 18:42:51</td>
+                <td>Default Session (0x10 0x01)</td>
+                <td>Fail</td>
+            </tr>
+        
+            <tr class="pass">
+                <td>2025-04-02 18:42:55</td>
+                <td>Extended Session (0x10 0x03)</td>
+                <td>Pass</td>
+            </tr>
+        
+            <tr class="fail">
+                <td>2025-04-02 18:42:56</td>
+                <td>Read DID (0xF190)</td>
+                <td>Fail</td>
+            </tr>
+        
+        </table>
+    </body>
+    </html>
+    

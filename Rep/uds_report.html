@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UDS System Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .pass { color: green; }
+        .fail { color: red; }
+    </style>
+</head>
+<body>
+    <h2>UDS System Report</h2>
+    <p>Generated on: 2025-04-02 13:55:04</p>
+    <table>
+        <tr>
+            <th>Step</th>
+            <th>Type</th>
+            <th>Details</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>16</td>
+            <td>Wait</td>
+            <td>Waited for 100.000 ms</td>
+            <td class="fail">-</td>
+        </tr>
+    
+        <tr>
+            <td>17</td>
+            <td>Diagnostic Service</td>
+            <td>Set P2 to 3000ms, P2ex to 5000ms</td>
+            <td class="pass">Passed</td>
+        </tr>
+    
+        <tr>
+            <td>17</td>
+            <td>Request</td>
+            <td>Sending request to MSW_27770110</td>
+            <td class="fail">Sent</td>
+        </tr>
+    
+        <tr>
+            <td>17</td>
+            <td>Response</td>
+            <td>Positive response received</td>
+            <td class="pass">Pass</td>
+        </tr>
+    
+    </table>
+</body>
+</html>

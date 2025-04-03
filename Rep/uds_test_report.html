@@ -1,0 +1,56 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>UDS Test Report</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 40px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            th, td { border: 1px solid black; padding: 10px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            .pass { background-color: #d4edda; }
+            .fail { background-color: #f8d7da; }
+        </style>
+    </head>
+    <body>
+        <h2>UDS Test Report</h2>
+        <table>
+            <tr>
+                <th>Request</th>
+                <th>Expected Response</th>
+                <th>Actual Response</th>
+                <th>Status</th>
+            </tr>
+    
+            <tr class='pass'>
+                <td>0x10 0x01</td>
+                <td>0x50 0x01</td>
+                <td>0x50 0x01</td>
+                <td>PASS</td>
+            </tr>
+        
+            <tr class='pass'>
+                <td>0x10 0x03</td>
+                <td>0x50 0x03</td>
+                <td>0x50 0x03</td>
+                <td>PASS</td>
+            </tr>
+        
+            <tr class='pass'>
+                <td>0x22 0xF1 0x90</td>
+                <td>0x62 0xF1 0x90 0x12 0x34</td>
+                <td>0x62 0xF1 0x90 0x12 0x34</td>
+                <td>PASS</td>
+            </tr>
+        
+            <tr class='fail'>
+                <td>0x22 0xF1 0xA0</td>
+                <td>0x62 0xF1 0xA0 0x56 0x78</td>
+                <td>0x7F 0x22 0x31</td>
+                <td>FAIL</td>
+            </tr>
+        
+        </table>
+    </body>
+    </html>
+    

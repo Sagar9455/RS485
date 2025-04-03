@@ -1,0 +1,49 @@
+
+    <html>
+    <head>
+        <title>DID Read Test Report</title>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+            th { background-color: green; color: white; }
+            .pass { background-color: #d0f0c0; }
+            .fail { background-color: #f8d7da; }
+            h2 { text-align: center; }
+        </style>
+    </head>
+    <body>
+        <h2>DID Read Test Report</h2>
+        <table>
+            <tr>
+                <th>DID</th>
+                <th>Response</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+            </tr>
+    
+            <tr class='pass'>
+                <td>0xF190</td>
+                <td>123456789ABCDEF</td>
+                <td>Pass</td>
+                <td>2025-04-02 14:16:36</td>
+            </tr>
+        
+            <tr class='fail'>
+                <td>0xF18C</td>
+                <td>Error: No response</td>
+                <td>Fail</td>
+                <td>2025-04-02 14:16:36</td>
+            </tr>
+        
+            <tr class='pass'>
+                <td>0xF195</td>
+                <td>9876543210ABCDEF</td>
+                <td>Pass</td>
+                <td>2025-04-02 14:16:36</td>
+            </tr>
+        
+        </table>
+    </body>
+    </html>
+    

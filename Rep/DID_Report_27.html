@@ -1,0 +1,34 @@
+
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            table { border-collapse: collapse; width: 80%; margin: auto; }
+            th, td { border: 1px solid black; padding: 10px; text-align: center; }
+            th { background-color: green; color: white; }
+            .pass-row { background-color: #d4edda; }
+            .fail-row { background-color: #f8d7da; }
+        </style>
+    </head>
+    <body>
+        <h2 style='text-align:center;'>DID Read Test Report</h2>
+        <table>
+            <tr>
+                <th>Timestamp</th>
+                <th>Action</th>
+                <th>Status</th>
+            </tr>
+            <tr class="{request_status.lower()}">
+                <td>{time.strftime('%Y-%m-%d %H:%M:%S')}</td>
+                <td>Request Sent</td>
+                <td>{request_status}</td>
+            </tr>
+            <tr class="{response_status.lower()}">
+                <td>{time.strftime('%Y-%m-%d %H:%M:%S')}</td>
+                <td>Positive Response Received</td>
+                <td>{response_status}</td>
+            </tr>
+        </table>
+    </body>
+    </html>
+    
